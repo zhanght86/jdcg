@@ -56,7 +56,6 @@
 		<result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
 		<result column="STEP_NUMBER" jdbcType="VARCHAR" property="stepNumber" />
 		<result column="AUDIT_AT" jdbcType="TIMESTAMP" property="auditAt" />
-        <result column="IS_REFERENCE_LETTER" jdbcType="VARCHAR" property="isReferenceLftter" />
 
 
 	</resultMap>
@@ -82,8 +81,9 @@
 		PRODUCT_CATEGORIES, ACADEMIC_ACHIEVEMENT,
 		REVIEW_SITUATION,
 		AVOIDANCE_SITUATION,
-		AUDIT_AT,
-		IS_REFERENCE_LETTER
+		AUDIT_AT
+
+
 	</sql>
 	<sql id="Column_List">
 		e.ID, e.IS_SUBMIT, e.IS_DO, e.IS_DELETE, e.CREATED_AT,
@@ -111,6 +111,7 @@
 		e.REVIEW_SITUATION,
 		e.AVOIDANCE_SITUATION,
 		e.AUDIT_AT
+
 	</sql>
 	<!-- 获取所有专家,仅用作定时删除无效专家 -->
 	<select id="getAllExpert" resultMap="BaseResultMap">
@@ -249,6 +250,7 @@
 		#{isPass,jdbcType=DECIMAL},
 		#{isProvisional,jdbcType=DECIMAL},#{remarks,jdbcType=VARCHAR},
 		#{auditAt,jdbcType=TIMESTAMP}
+
 		)
 	</insert>
 	<insert id="insertSelective" parameterType="ses.model.ems.Expert">
@@ -405,6 +407,7 @@
 			<if test="auditAt != null">
 				AUDIT_AT,
 			</if>
+
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -557,6 +560,7 @@
 			<if test="auditAt != null">
 				#{auditAt,jdbcType=TIMESTAMP},
 			</if>
+
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="ses.model.ems.Expert">
@@ -710,6 +714,7 @@
 			<if test="auditAt != null">
 				AUDIT_AT = #{auditAt,jdbcType=TIMESTAMP},
 			</if>
+
 		</set>
 		where ID = #{id,jdbcType=VARCHAR}
 	</update>
@@ -865,6 +870,7 @@
 			<if test="auditAt != null and createdAt != ''">
 				AUDIT_AT = #{auditAt,jdbcType=TIMESTAMP},
 			</if>
+
 		</set>
 		where
 		ID = #{id,jdbcType=VARCHAR}
@@ -1131,6 +1137,7 @@
 		COVER_NOTE, PRODUCT_CATEGORIES,
 		ACADEMIC_ACHIEVEMENT, REVIEW_SITUATION,
 		AVOIDANCE_SITUATION
+
 		)
 		values
 		(#{id,jdbcType=VARCHAR},
@@ -1170,6 +1177,7 @@
 		#{academicAchievement,jdbcType=VARCHAR},
 		#{reviewSituation,jdbcType=VARCHAR},
 		#{avoidanceSituation,jdbcType=VARCHAR}
+
 		)
 	</insert>
 
@@ -1217,6 +1225,7 @@
 		REVIEW_SITUATION
 		reviewSituation,
 		AVOIDANCE_SITUATION avoidanceSituation
+
 		from T_SES_EMS_EXPERT_History
 		where ID = #{_parameter}
 	</select>

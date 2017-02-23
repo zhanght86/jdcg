@@ -108,8 +108,7 @@
 			}
 
 			function saveCategory(event, treeId, treeNode) {
-			
-			alert(new Date())
+
 				var clickFlag;
 				if(treeNode.checked) {
 					clickFlag = "1";

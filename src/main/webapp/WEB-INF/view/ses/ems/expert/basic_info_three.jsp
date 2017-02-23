@@ -85,7 +85,7 @@ session.setAttribute("tokenSession", tokenValue);
 				//暂存无提示
 				submitForm2();
 			}
-			/** 专家完善注册信息页面 */
+		/*	/!** 专家完善注册信息页面 *!/
 			function supplierRegist5() {
 				if(!validateJiGou()) {
 					return false;
@@ -102,9 +102,9 @@ session.setAttribute("tokenSession", tokenValue);
 			function pre() {
 				updateStepNumber("seven");
 				window.location.href = "${pageContext.request.contextPath}/expert/toAddBasicInfo.html?userId=${userId}";
-			}
+			}*/
 
-			function pre6(name, i, position) {
+	/*		function pre6(name, i, position) {
 				$.ajax({
 					url: "${pageContext.request.contextPath}/expert/getAllCategory.do",
 					data: {
@@ -122,16 +122,14 @@ session.setAttribute("tokenSession", tokenValue);
 					}
 				});
 			}
+*/
 
-			function tab1() {
-				updateStepNumber("one");
-				window.location.href = "${pageContext.request.contextPath}/expert/toAddBasicInfo.html?userId=${userId}";
-			}
 
-			function addPurList() {
+	/*		function addPurList() {
 				supplierRegist();
 			}
-
+*/
+/*
 			function tab4(att) {
 				if(att == '1') {
 					supplierRegist2();
@@ -143,8 +141,9 @@ session.setAttribute("tokenSession", tokenValue);
 					supplierRegist();
 				}
 			}
+*/
 
-			function updateStepNumber(stepNumber) {
+/*			function updateStepNumber(stepNumber) {
 				$.ajax({
 					url: "${pageContext.request.contextPath}/expert/updateStepNumber.do",
 					data: {
@@ -161,7 +160,7 @@ session.setAttribute("tokenSession", tokenValue);
 				});
 			}
 			
-			
+			*/
 			
 		</script>
 	</head>
@@ -169,7 +168,7 @@ session.setAttribute("tokenSession", tokenValue);
 	<body>
 		<form id="formExpert" action="${pageContext.request.contextPath}/expert/add.html" method="post">
 			<input type="hidden" name="userId" value="${user.id}" />
-			<input type="hidden" id="purchaseDepId" value="${expert.purchaseDepId}" />
+			<input type="hidden" id="purchaseDepId" name="purchaseDepId" value="${expert.purchaseDepId}" />
 			<input type="hidden" name="id" id="id" value="${expert.id}" />
 			<input type="hidden" name="zancun" id="zancun" value="" />
 			<input type="hidden" name="sysId" id="sysId" value="${sysId}" />
@@ -194,10 +193,10 @@ session.setAttribute("tokenSession", tokenValue);
 			<!-- 项目戳开始 -->
 			<div id="reg_box_id_5" class="container clear margin-top-30 yinc">
 				<h2 class="padding-20 mt40">
-					<span id="jg1" class="new_step current fl" onclick='tab1()'><i class="">1</i><div class="line"></div> <span class="step_desc_02">基本信息</span> </span> 
+					<span id="jg1" class="new_step current fl" onclick='operation(1)'><i class="">1</i><div class="line"></div> <span class="step_desc_02">基本信息</span> </span>
 					<!-- <span id="jg2" class="new_step current fl" onclick='pre()'><i class="">2</i><div class="line"></div> <span class="step_desc_01">经历经验</span> </span> -->
-					<span id="sp7" class="new_step current fl" onclick='pre7()'><i class="">2</i><div class="line"></div> <span class="step_desc_02">专家类别</span> </span>
-					<span id="ty6" class="new_step current fl" onclick='pre6()'><i class="">3</i><div class="line"></div> <span class="step_desc_01">产品类别</span> </span>
+					<span id="sp7" class="new_step current fl" onclick='operation(7)'><i class="">2</i><div class="line"></div> <span class="step_desc_02">专家类别</span> </span>
+					<span id="ty6" class="new_step current fl" onclick='operation(6)'><i class="">3</i><div class="line"></div> <span class="step_desc_01">产品类别</span> </span>
 					<span id="jg3" class="new_step current fl"><i class="">4</i><div class="line"></div> <span class="step_desc_02">采购机构</span> </span> 
 					<span id="jg4" class="new_step fl"><i class="">5</i><div class="line"></div> <span class="step_desc_01">文件下载</span> </span> 
 					<span id="jg5" class="new_step fl"><i class="">6</i> <span class="step_desc_02">提交审核</span> </span> 
@@ -217,11 +216,13 @@ session.setAttribute("tokenSession", tokenValue);
 								<th class="info">联系地址</th> -->
 							</tr>
 						</thead>
-						<tbody id="purchase_orgs2">
+						<tbody id="purchase_orgs">
 							<c:forEach items="${allPurList}" var="org1" varStatus="vs">
 								<c:if test="${org1.cityId eq expert.address}">
 								<tr>
-									<td class="tc"><input type="radio" value="${org1.id}" onclick="checkDep(this)" name="procurementDepId" <c:if test="${org1.provinceId==currSupplier.procurementDepId}"> checked='checked' </c:if> /></td>
+									<td class="tc"><input type="radio" value="${org1.id}" onclick="checkDep(this)"
+                                            <c:if test="${org1.provinceId==currSupplier.purchaseDepId}"> checked='checked' </c:if> />
+                                    </td>
 									<td class="tc">${vs.index + 1}</td>
 									<td class="tc">${org1.name}</td>
 									<%-- <td class="tc">${org1.supplierContact}</td>
@@ -245,11 +246,11 @@ session.setAttribute("tokenSession", tokenValue);
 								<th class="info">联系地址</th> -->
 							</tr>
 						</thead>
-						<tbody id="purchase_orgs2">
+						<tbody id="purchase_orgs_">
 							<c:forEach items="${allPurList}" var="org1" varStatus="vs">
 								<c:if test="${org1.cityId ne expert.address}">
-								<tr>
-									<td class="tc"><input type="radio" value="${org1.id}" onclick="checkDep(this)" name="procurementDepId" <c:if test="${org1.provinceId==currSupplier.procurementDepId}"> checked='checked' </c:if> /></td>
+								<tr  >
+									<td class="tc"><input type="radio" value="${org1.id}" onclick="checkDep(this)" name="procurementDepId" <c:if test="${org1.id==expert.purchaseDepId}"> checked='checked' </c:if> /></td>
 									<td class="tc">${vs.index + 1}</td>
 									<td class="tc">${org1.name}</td>
 									<%-- <td class="tc">${org1.supplierContact}</td>
@@ -265,9 +266,9 @@ session.setAttribute("tokenSession", tokenValue);
 		    </h6>
 					<div class="btmfix">
 						<div class="mt15 tc">
-							<button class="btn" type="button" onclick="pre6()">上一步</button>
-							<button class="btn" onclick='zc()' type="button">暂存</button>
-							<button class="btn" type="button" onclick='addPurList()'>下一步</button>
+							<button class="btn" type="button" onclick="operation(6)">上一步</button>
+							<button class="btn" onclick='operation(0)' type="button">暂存</button>
+							<button class="btn" type="button" onclick='operation(5)'>下一步</button>
 						</div>
 					</div>
 				</div>
@@ -275,5 +276,87 @@ session.setAttribute("tokenSession", tokenValue);
 		</form>
 		<jsp:include page="/index_bottom.jsp"></jsp:include>
 	</body>
+<script>
+    var isClick=false;
+    var operation=function(number){
+        switch ( parseInt(number)){
+            case 1 :
+                updateStepNumber("one");
+                window.location.href = "${pageContext.request.contextPath}/expert/toAddBasicInfo.html?userId=${userId}";
+                break;
+            case 7:
+                updateStepNumber("seven");
+                window.location.href = "${pageContext.request.contextPath}/expert/toAddBasicInfo.html?userId=${userId}";
+                break;
+            case 6:
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/expert/getAllCategory.do",
+                    data: {
+                        "expertId": $("#id").val()
+                    },
+                    async: false,
+                    dataType: "json",
+                    success: function(response) {
+                        if(!$.isEmptyObject(response)) {
+                            updateStepNumber("six");
+                        } else {
+                            updateStepNumber("two");
+                        }
+                        window.location.href = "${pageContext.request.contextPath}/expert/toAddBasicInfo.html?userId=${userId}";
+                    }
+                });
+                break;
+            case 5 :
+                if(!isClick){
+                    layer.msg("请选择采购机构!", {
+                        offset: ['300px', '750px']
+                    });
+                    return
+                }
+                updateStepNumber("four");
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/expert/zanCun.do",
+                    data: $("#formExpert").serialize(),
+                    type: "post",
+                    async: true,
+                    success: function(result) {
+                        $("#id").val(result.id);
+                        window.location.href = "${pageContext.request.contextPath}/expert/toAddBasicInfo.html?userId=${userId}";
+                    }
+                });
+                break;
+            case 0:
+                console.info(JSON.stringify( $("#formExpert").serializeArray()))
+                return
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/expert/zanCun.do",
+                    data: $("#formExpert").serialize(),
+                    type: "post",
+                    async: true,
+                    success: function(result) {
+                        $("#id").val(result.id);
+                    }
+                });
+                break;
+            default:
 
+                break
+        }
+
+    }
+    var checkDep=function(dom){
+     $("#purchaseDepId").val($( dom).val());
+        isClick=true;
+    }
+    var updateStepNumber= function(stepNumber) {
+        $.ajax({
+            url: "${pageContext.request.contextPath}/expert/updateStepNumber.do",
+            data: {
+                "expertId": $("#id").val(),
+                "stepNumber": stepNumber
+            },
+            async: false,
+        });
+    }
+</script>
 </html>

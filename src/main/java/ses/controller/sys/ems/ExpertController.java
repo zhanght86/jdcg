@@ -95,7 +95,8 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import common.constant.Constant;
 import common.constant.StaticVariables;
-
+import  common.service.UploadService;
+import common.model.UploadFile;
 @Controller
 @RequestMapping("/expert")
 public class ExpertController extends BaseController {
@@ -145,6 +146,9 @@ public class ExpertController extends BaseController {
 	private SupplierService supplierService; //供应商
 	@Autowired
 	private BidMethodService bidMethodService;
+	//校验文件是否上传
+    @Autowired
+    private UploadService uploadService;
 
 	/**
 	 * 
@@ -1567,6 +1571,14 @@ public class ExpertController extends BaseController {
 	@ResponseBody
 	public Expert zanCun(String sysId, Expert expert, String categoryId,
 		String userId, Model model, HttpSession session) {
+
+
+        List <UploadFile> tlist = uploadService.getFilesOther(, 1, Constant.EXPERT_SYS_KEY.toString());
+        if(tlist != null && tlist.size() <= 0) {
+            count++;
+            model.addAttribute("err_taxCert", "请上传文件!");
+        }
+
 		try {
 			// 预定义id
 			String expertId = sysId;
