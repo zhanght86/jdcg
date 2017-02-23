@@ -862,7 +862,7 @@
 										<li class="col-md-3 col-sm-6 col-xs-12 pl10">
 											<span class="col-md-12 col-xs-12 col-sm-12  padding-left-5"><i class="red">*</i> 生产经营地址邮编</span>
 											<div class="input-append col-md-12 col-sm-12 col-xs-12 input_group p0">
-												<input type="text" required isZipCode="true" name="addressList[${vs.index }].code" value="${addr.code}" />
+												<input type="text" required isZipCode="true" name="addressList[${vs.index }].code" value="${addr.code}" <c:if test="${fn:contains(audit,'code_'.concat(addr.id))}">style="border: 1px solid #ef0000;" onmouseover="errorMsg('code_${addr.id }')"</c:if>/>
 												<span class="add-on cur_point">i</span>
 												<span class="input-tip">不能为空，长度为6位</span>
 												<div class="cue">
@@ -875,7 +875,7 @@
 											<span class="col-md-12 col-xs-12 col-sm-12 padding-left-5"><i class="red">*</i> 生产经营地址（填写所有地址）</span>
 											<div class="col-md-12 col-xs-12 col-sm-12 select_common p0">
 												<div class="col-md-5 col-xs-5 col-sm-5 mr5 p0">
-													<select id="root_area_select_id" onchange="loadChildren(this)" name="addressList[${vs.index }].provinceId">
+													<select id="root_area_select_id" onchange="loadChildren(this)" name="addressList[${vs.index }].provinceId" <c:if test="${fn:contains(audit,'address_'.concat(addr.id))}">style="border: 1px solid #ef0000;" onmouseover="errorMsg('address_${addr.id }')"</c:if>>
 														<option value="">请选择</option>
 														<c:forEach items="${privnce }" var="prin">
 															<c:if test="${prin.id==addr.provinceId }">
@@ -889,7 +889,7 @@
 													</select>
 												</div>
 												<div class="col-md-5 col-xs-5 col-sm-5 mr5 p0">
-													<select id="children_area_select_id" name="addressList[${vs.index }].address">
+													<select id="children_area_select_id" name="addressList[${vs.index }].address" <c:if test="${fn:contains(audit,'address_'.concat(addr.id))}">style="border: 1px solid #ef0000;" onmouseover="errorMsg('address_${addr.id }')"</c:if>>
 														<c:forEach items="${addr.areaList }" var="city">
 															<c:if test="${city.id==addr.address }">
 																<option value="${city.id }" selected="selected">${city.name }</option>
@@ -907,7 +907,7 @@
 										<li class="col-md-3 col-sm-6 col-xs-12">
 											<span class="col-md-12 col-xs-12 col-sm-12 padding-left-5"><i class="red">*</i> 生产经营详细地址</span>
 											<div class="input-append col-md-12 col-sm-12 col-xs-12 input_group p0">
-												<input type="text" name="addressList[${vs.index }].detailAddress" required="required" maxlength="50" value="${addr.detailAddress }">
+												<input type="text" name="addressList[${vs.index }].detailAddress" required="required" maxlength="50" value="${addr.detailAddress }" <c:if test="${fn:contains(audit,'detailAddress_'.concat(addr.id))}">style="border: 1px solid #ef0000;" onmouseover="errorMsg('detailAddress_${addr.id }')"</c:if>>
 												<span class="add-on cur_point">i</span>
 												<span class="input-tip">不能为空</span>
 												<div class="cue">
@@ -959,9 +959,9 @@
 								</li>
 
 								<li class="col-md-6 col-sm-12 col-xs-12 mb25 h30">
-									<span class="col-md-5 col-sm-12 col-xs-12 padding-left-5 w250" <c:if test="${fn:contains(audit,'isIllegal')}">style="border: 1px solid #ef0000;" onmouseover="errorMsg('isIllegal')"</c:if>><i class="red">*</i> 近三年内有无重大违法记录</span>
+									<span class="col-md-5 col-sm-12 col-xs-12 padding-left-5 w250" ><i class="red">*</i> 近三年内有无重大违法记录</span>
 									<div class="col-md-6 col-sm-12 col-xs-12 p0">
-										<select name="isIllegal" id="isIllegal" class="fl mr10 w120">
+										<select name="isIllegal" id="isIllegal" class="fl mr10 w120" <c:if test="${fn:contains(audit,'isIllegal')}">style="border: 1px solid #ef0000;" onmouseover="errorMsg('isIllegal')"</c:if>>
 											<option value='' disabled selected style="display: none;">请选择</option>
 											<option value="0" <c:if test="${currSupplier.isIllegal eq '0'}">selected</c:if>>无违法</option>
 											<option value="1" <c:if test="${currSupplier.isIllegal eq '1'}">selected</c:if>>有违法</option>
@@ -981,7 +981,7 @@
 									</div>
 								</li>
 								<li class="col-md-6 col-sm-12 col-xs-12 mb25" id="bearchCertDiv">
-									<span class="col-md-5 col-sm-12 col-xs-12 padding-left-5 w250" <c:if test="${fn:contains(audit,'bearchCert')}">style="border: 1px solid #ef0000;" onmouseover="errorMsg('bearchCert')"</c:if>><i class="red">*</i> 保密资格证书</span>
+									<span class="col-md-5 col-sm-12 col-xs-12 padding-left-5 w250" <c:if test="${fn:contains(audit,'supplierBearchCert')}">style="border: 1px solid #ef0000;" onmouseover="errorMsg('supplierBearchCert')"</c:if>><i class="red">*</i> 保密资格证书</span>
 									<div class="col-md-6 col-sm-12 col-xs-12 p0">
 										<u:upload singleFileSize="${properties['file.picture.upload.singleFileSize']}" exts="${properties['file.picture.type']}" id="bearchcert_up" multiple="true" businessId="${currSupplier.id}" sysKey="${sysKey}" typeId="${supplierDictionaryData.supplierBearchCert}" auto="true" />
 										<u:show showId="bearchcert_show" businessId="${currSupplier.id}" sysKey="${sysKey}" typeId="${supplierDictionaryData.supplierBearchCert}" />
@@ -1402,7 +1402,7 @@
 										<li name="branch" style="display: none;" class="col-md-3 col-sm-6 col-xs-12 pl10">
 											<span class="col-md-12 col-xs-12 col-sm-12 padding-left-5"><i class="red">* </i>机构名称</span>
 											<div class="input-append col-md-12 col-sm-12 col-xs-12 input_group p0">
-												<input type="text" name="branchList[${vs.index }].organizationName" id="sup_branchName" required maxlength="50" value="${bran.organizationName}" />
+												<input type="text" name="branchList[${vs.index }].organizationName" id="sup_branchName" required maxlength="50" value="${bran.organizationName}" <c:if test="${fn:contains(audit,'organizationName_'.concat(bran.id))}">style="border: 1px solid #ef0000;" onmouseover="errorMsg('organizationName_${bran.id }')"</c:if>/>
 												<span class="add-on cur_point">i</span>
 												<span class="input-tip">不能为空</span>
 												<div class="cue">
@@ -1416,7 +1416,7 @@
 											<div class="select_common col-md-12 col-sm-12 col-xs-12  p0">
 												<%-- 	<input name="branchList[${vs.index }].country" id="sup_country" type="text" value="${bran.country}" />
 			        <span class="add-on cur_point">i</span> --%>
-												<select name="branchList[${vs.index }].country" id="overseas_branch_select_id" required>
+												<select name="branchList[${vs.index }].country" id="overseas_branch_select_id" required <c:if test="${fn:contains(audit,'countryName_'.concat(bran.id))}">style="border: 1px solid #ef0000;" onmouseover="errorMsg('countryName_${bran.id }')"</c:if>>
 													<option value="">请选择</option>
 													<c:forEach items="${foregin }" var="fr">
 														<option value="${fr.id }" <c:if test="${bran.country==fr.id}">selected='selected' </c:if> >${fr.name }</option>
@@ -1428,7 +1428,7 @@
 										<li name="branch" style="display: none;" class="col-md-3 col-sm-6 col-xs-12">
 											<span class="col-md-12 col-xs-12 col-sm-12 padding-left-5"><i class="red">* </i>详细地址</span>
 											<div class="input-append col-md-12 col-sm-12 col-xs-12 input_group p0">
-												<input type="text" name="branchList[${vs.index }].detailAddress" required maxlength="50" id="sup_branchAddress" value="${bran.detailAddress}" />
+												<input type="text" name="branchList[${vs.index }].detailAddress" required maxlength="50" id="sup_branchAddress" value="${bran.detailAddress}" <c:if test="${fn:contains(audit,'detailAddress_'.concat(bran.id))}">style="border: 1px solid #ef0000;" onmouseover="errorMsg('detailAddress_${bran.id }')"</c:if>/>
 												<span class="add-on cur_point">i</span>
 												<span class="input-tip">不能为空</span>
 												<div class="cue">
@@ -1448,7 +1448,7 @@
 										<li name="branch" style="display: none;" class="col-md-12 col-xs-12 col-sm-12 mb25">
 											<span class="col-md-12 c ol-xs-12 col-sm-12 padding-left-5"><i class="red">* </i>生产经营范围</span>
 											<div class="col-md-12 col-xs-12 col-sm-12 p0">
-												<textarea class="col-md-12 col-xs-12 col-sm-12 h80" maxlength="300" id="branchbusinessSope" required name="branchList[${vs.index }].businessSope">${bran.businessSope}</textarea>
+												<textarea class="col-md-12 col-xs-12 col-sm-12 h80" maxlength="300" id="branchbusinessSope" required name="branchList[${vs.index }].businessSope" <c:if test="${fn:contains(audit,'businessSope_'.concat(bran.id))}">style="border: 1px solid #ef0000;" onmouseover="errorMsg('businessSope_${bran.id }')"</c:if>>${bran.businessSope}</textarea>
 												<div class="cue">
 													<sf:errors path="branchList[${vs.index }].businessSope" />
 												</div>
