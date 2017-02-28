@@ -429,16 +429,10 @@
                 return false;
             }
 
-            if (telephone != "") {
-                var reg = /^(\d{3,4}-{0,1})?\d{7,8}$/
-                if (!reg.test(telephone)) {
-                    layer.msg("固定电话格式有误!");
-                    return false;
-                }
-            }
+
 
             var mobile = $("#mobile").val();
-            if (!mobile) {
+           if (!mobile) {
                 layer.msg("请填写手机号!");
                 return false;
             }
@@ -458,12 +452,20 @@
                 layer.msg("个人邮箱格式有误 !");
                 return false;
             }
+
+           /* if (telephone != "") {
+                var reg = /^(\d{3,4}-{0,1})?\d{7,8}$/
+                if (!reg.test(telephone)) {
+                    layer.msg("固定电话格式有误!");
+                    return false;
+                }
+            }*/
             var fax = $("#fax").val();
             var faxReg = /^(\d{3,4}-{0,1})?\d{7,8}$/
-            if (fax != "" && !faxReg.test(fax)) {
+           /* if (fax != "" && !faxReg.test(fax)) {
                 layer.msg("传真电话格式有误 !");
                 return false;
-            }
+            }*/
             var postCode = $("#postCode").val();
             if (idNumber != "" && isNaN(postCode)) {
                 layer.msg("邮编格式只能输入数字 !");
