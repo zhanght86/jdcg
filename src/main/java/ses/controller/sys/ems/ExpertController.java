@@ -1825,6 +1825,9 @@ public class ExpertController extends BaseController {
         List<UploadFile> QUALIFICATIONS_PROOF = uploadService.getFilesOther(sysId, ExpertPictureType.QUALIFICATIONS_PROOF.getSign() + "", Constant.EXPERT_SYS_KEY.toString());
         List<UploadFile> RECOMMENDATION_PROOF = uploadService.getFilesOther(sysId, ExpertPictureType.RECOMMENDATION_PROOF.getSign() + "", Constant.EXPERT_SYS_KEY.toString());
         List<UploadFile> PRACTICING_REQUIREMENTS_PROOF = uploadService.getFilesOther(sysId, ExpertPictureType.PRACTICING_REQUIREMENTS_PROOF.getSign() + "", Constant.EXPERT_SYS_KEY.toString());
+        List<UploadFile> APPLICATION_PROOF = uploadService.getFilesOther(sysId, ExpertPictureType.APPLICATION_PROOF.getSign() + "", Constant.EXPERT_SYS_KEY.toString());
+        List<UploadFile> COMMITMENT_PROOF = uploadService.getFilesOther(sysId, ExpertPictureType.COMMITMENT_PROOF.getSign() + "", Constant.EXPERT_SYS_KEY.toString());
+
 
 
         String imgInfo="cg";
@@ -1862,6 +1865,14 @@ public class ExpertController extends BaseController {
         }
         if(isReferenceLftter==3 && PRACTICING_REQUIREMENTS_PROOF.size()<1 && PRACTICING_REQUIREMENTS_PROOF!=null){
             imgInfo="执业资格证书未上传";
+            return JSON.toJSONString(imgInfo);
+        }
+        if( APPLICATION_PROOF.size()<1 && isReferenceLftter==5 && APPLICATION_PROOF!=null){
+            imgInfo="专家申请未上传";
+            return JSON.toJSONString(imgInfo);
+        }
+        if( COMMITMENT_PROOF.size()<1 && isReferenceLftter==5    &&  COMMITMENT_PROOF!=null){
+            imgInfo="专家承诺未上传";
             return JSON.toJSONString(imgInfo);
         }
     return imgInfo;
