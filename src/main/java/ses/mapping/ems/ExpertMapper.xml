@@ -56,7 +56,10 @@
 		<result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
 		<result column="STEP_NUMBER" jdbcType="VARCHAR" property="stepNumber" />
 		<result column="AUDIT_AT" jdbcType="TIMESTAMP" property="auditAt" />
-
+        <result column="IS_REFERENCE_LETTER" jdbcType="CHAR" property="isReferenceLftter" />
+        <result column="PROFESSIONAL" jdbcType="VARCHAR"  property="professional" />
+        <result column="TIME_PROFESSIONAL" jdbcType="TIMESTAMP" property="timeProfessional" />
+        <result column="RANGE" jdbcType="VARCHAR"  property="range" />
 
 	</resultMap>
 	<sql id="Base_Column_List">
@@ -81,9 +84,11 @@
 		PRODUCT_CATEGORIES, ACADEMIC_ACHIEVEMENT,
 		REVIEW_SITUATION,
 		AVOIDANCE_SITUATION,
-		AUDIT_AT
-
-
+		AUDIT_AT,
+        IS_REFERENCE_LETTER,
+        PROFESSIONAL,
+       TIME_PROFESSIONAL,
+      RANGE
 	</sql>
 	<sql id="Column_List">
 		e.ID, e.IS_SUBMIT, e.IS_DO, e.IS_DELETE, e.CREATED_AT,
@@ -110,8 +115,11 @@
 		e.PRODUCT_CATEGORIES, e.ACADEMIC_ACHIEVEMENT,
 		e.REVIEW_SITUATION,
 		e.AVOIDANCE_SITUATION,
-		e.AUDIT_AT
-
+		e.AUDIT_AT,
+        e.IS_REFERENCE_LETTER,
+        e.PROFESSIONAL,
+        e.TIME_PROFESSIONAL,
+        e.RANGE
 	</sql>
 	<!-- 获取所有专家,仅用作定时删除无效专家 -->
 	<select id="getAllExpert" resultMap="BaseResultMap">
@@ -211,7 +219,10 @@
 		AT_DUTY,
 		EXPERTS_TYPE_ID, PURCHASE_DEP_ID, STATUS,
 		IS_BLACK,
-		HONESTY_SCORE, REAL_NAME, IS_PASS, IS_PROVISIONAL, REMARKS, AUDIT_AT
+		HONESTY_SCORE, REAL_NAME, IS_PASS, IS_PROVISIONAL, REMARKS, AUDIT_AT, IS_REFERENCE_LETTER,
+        PROFESSIONAL,
+       TIME_PROFESSIONAL,
+       RANGE
 		)
 		values
 		(#{id,jdbcType=VARCHAR},
@@ -249,7 +260,10 @@
 		#{relName,jdbcType=VARCHAR},
 		#{isPass,jdbcType=DECIMAL},
 		#{isProvisional,jdbcType=DECIMAL},#{remarks,jdbcType=VARCHAR},
-		#{auditAt,jdbcType=TIMESTAMP}
+		#{auditAt,jdbcType=TIMESTAMP},
+        #{professional,jdbcType=VARCHAR},
+        #{timeProfessional,jdbcType=TIMESTAMP},
+        #{range,jdbcType=VARCHAR}
 
 		)
 	</insert>
@@ -407,6 +421,18 @@
 			<if test="auditAt != null">
 				AUDIT_AT,
 			</if>
+            <if test="isReferenceLftter != null">
+                IS_REFERENCE_LETTER,
+            </if>
+            <if test="professional != null">
+                PROFESSIONAL,
+            </if>
+            <if test="timeProfessional != null">
+                TIME_PROFESSIONAL,
+            </if>
+            <if test="range != null">
+                RANGE,
+            </if>
 
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -560,6 +586,18 @@
 			<if test="auditAt != null">
 				#{auditAt,jdbcType=TIMESTAMP},
 			</if>
+            <if test="isReferenceLftter != null">
+                #{isReferenceLftter,jdbcType=CHAR},
+            </if>
+            <if test="professional != null">
+                #{PROFESSIONAL,jdbcType=VARCHAR},
+            </if>
+            <if test="timeProfessional != null">
+                #{TIME_PROFESSIONAL,jdbcType=TIMESTAMP},
+            </if>
+            <if test="range != null">
+                #{RANGE,jdbcType=VARCHAR},
+            </if>
 
 		</trim>
 	</insert>
@@ -714,6 +752,19 @@
 			<if test="auditAt != null">
 				AUDIT_AT = #{auditAt,jdbcType=TIMESTAMP},
 			</if>
+            <if test="isReferenceLftter != null">
+                IS_REFERENCE_LETTER = #{isReferenceLftter,jdbcType=CHAR},
+            </if>
+
+            <if test="professional != null">
+                PROFESSIONAL = #{professional,jdbcType=VARCHAR},
+            </if>
+            <if test="timeProfessional != null">
+                TIME_PROFESSIONAL = #{timeProfessional,jdbcType=TIMESTAMP},
+            </if>
+            <if test="range != null">
+                RANGE = #{range,jdbcType=VARCHAR},
+            </if>
 
 		</set>
 		where ID = #{id,jdbcType=VARCHAR}
@@ -870,6 +921,18 @@
 			<if test="auditAt != null and createdAt != ''">
 				AUDIT_AT = #{auditAt,jdbcType=TIMESTAMP},
 			</if>
+            <if test="isReferenceLftter != null and isReferenceLftter != ''">
+                IS_REFERENCE_LETTER = #{isReferenceLftter,jdbcType=CHAR},
+            </if>
+            <if test="professional != null and professional != ''">
+                PROFESSIONAL = #{professional,jdbcType=VARCHAR},
+            </if>
+            <if test="timeProfessional != null and timeProfessional != ''">
+                TIME_PROFESSIONAL = #{timeProfessional,jdbcType=TIMESTAMP},
+            </if>
+            <if test="range != null and range != ''">
+                RANGE = #{range,jdbcType=VARCHAR},
+            </if>
 
 		</set>
 		where
@@ -1136,8 +1199,11 @@
 		JOB_EXPERIENCES, ID_CARD_NUMBER,
 		COVER_NOTE, PRODUCT_CATEGORIES,
 		ACADEMIC_ACHIEVEMENT, REVIEW_SITUATION,
-		AVOIDANCE_SITUATION
-
+		AVOIDANCE_SITUATION,
+        IS_REFERENCE_LETTER,
+        PROFESSIONAL,
+        TIME_PROFESSIONAL,
+        RANGE
 		)
 		values
 		(#{id,jdbcType=VARCHAR},
@@ -1176,8 +1242,11 @@
 		#{productCategories,jdbcType=VARCHAR},
 		#{academicAchievement,jdbcType=VARCHAR},
 		#{reviewSituation,jdbcType=VARCHAR},
-		#{avoidanceSituation,jdbcType=VARCHAR}
-
+		#{avoidanceSituation,jdbcType=VARCHAR},
+        #{isReferenceLftter,jdbcType=INT},
+        #{professional,jdbcType=VARCHAR},
+        #{timeProfessional,jdbcType=TIMESTAMP},
+        #{range,jdbcType=VARCHAR}
 		)
 	</insert>
 
@@ -1224,8 +1293,11 @@
 		ACADEMIC_ACHIEVEMENT academicAchievement,
 		REVIEW_SITUATION
 		reviewSituation,
-		AVOIDANCE_SITUATION avoidanceSituation
-
+		AVOIDANCE_SITUATION avoidanceSituation,
+        IS_REFERENCE_LETTER isReferenceLftter,
+         PROFESSIONAL professional,
+        TIME_PROFESSIONAL timeProfessional,
+       RANGE  range
 		from T_SES_EMS_EXPERT_History
 		where ID = #{_parameter}
 	</select>

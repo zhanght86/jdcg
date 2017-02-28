@@ -142,7 +142,7 @@ session.setAttribute("tokenSession", tokenValue);
 					<span id="ty6" class="new_step current fl" onclick='pre6()'><i class="">3</i><div class="line"></div> <span class="step_desc_01">产品类别</span> </span>
 					<span id="dy3" class="new_step current fl" onclick='pre3()'><i class="">4</i><div class="line"></div> <span class="step_desc_02">采购机构</span> </span> 
 					<span id="dy4" class="new_step current fl"><i class="">5</i><div class="line"></div> <span class="step_desc_01">文件下载</span> </span> 
-					<span id="dy5" class="new_step fl"><i class="">6</i> <span class="step_desc_02">提交审核</span> </span> 
+					<span id="dy5" class="new_step fl"><i class="">6</i> <span class="step_desc_02">提交审核</span> </span>
 					<div class="clear"></div>
 		  		</h2>
 				<div class="tab-content padding-top-20">

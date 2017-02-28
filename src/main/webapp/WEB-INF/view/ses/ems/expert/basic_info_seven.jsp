@@ -32,6 +32,7 @@
         }
         //无提示暂存
         function submitForm2() {
+
             $.ajax({
                 url: "${pageContext.request.contextPath}/expert/zanCun.do",
                 data: $("#formExpert").serialize(),
@@ -59,32 +60,76 @@
             });
         }
         /** 专家完善注册信息页面 */
+
+
+        function mmm() {
+            var hh;
+            $.ajax({
+                url: "${pageContext.request.contextPath}/expert/findAttachment.do",
+                data: {
+                    "sysId": $("#sysId").val(),
+                    "from": "test",
+                    "isReferenceLftter": 3
+                },
+                cache: false,
+                async: false,
+                success: function (data) {
+                    if (data) {
+                        layer.msg(data);
+                        hh = false
+                    } else {
+
+
+                        hh = true
+                    }
+                },
+                dataType: "json"
+            });
+            return hh;
+        }
+
+
+        //function validations=
         function fun() {
             //此处是对选中专家进行校验
-            if( isIs){
-
-               if(!$("#professional").val()){
-                   layer.msg("请填写执业资格 !", {
-                       offset: ['300px', '750px']
-                   });
-                   return false;
-               }
-                if(!$("#timeProfessional").val()){
-                    layer.msg("请填写执业资格时间 !", {
-                        offset: ['300px', '750px']
-                    });
+            if (isIs) {
+                var asx = mmm();
+                if (!$("#professional").val()) {
+                    layer.msg("请填写执业资格 !");
                     return false;
                 }
+                if (!$("#timeProfessional").val()) {
+                    layer.msg("请填写执业资格时间 !");
+                    return false;
+                }
+                if ((typeof asx) == "undefined") {
+                    asx = true;
+                }
 
+                if (asx && isIs ) {
+                    if (!validateType()) {
+                        return;
+                    } else{
+                        submitForm2()
+                    }
+
+                }
+
+            }else{
+                if (!validateType()) {
+                    return;
+                } else{
+                    submitForm2()
+                }
 
             }
 
-            if (!validateType()) {
-                return;
-            } else {
+
+
+
                 //暂存无提示
-                submitForm2();
-            }
+
+
         }
 
         function updateStepNumber(stepNumber) {
@@ -132,16 +177,14 @@
             getChildren();
             var categoryId = $("#expertsTypeId").val();
             if (categoryId == "") {
-                layer.msg("请选择专家类别 !", {
-                    offset: ['222px', '390px']
-                });
+                layer.msg("请选择专家类别 !");
                 return false;
             }
             return true;
         }
         $(function () {
 
-                var bja = [];
+            var bja = [];
 
             $("input").bind("change", submitformExpert);
             var typeIds = "${expert.expertsTypeId}";
@@ -170,7 +213,7 @@
 
 
 //绑定工程技术的切换事件
-             isIs = bja.some(function (item, index, array) {
+            isIs = bja.some(function (item, index, array) {
                 return item == "3EC64C63FE15422EA100F58A4A872F4A"
             });
             if (isIs) {
@@ -181,11 +224,11 @@
             }
             $(checklist1[1]).change(function () {
                 if ($(this).prop("checked")) {
-                    isIs=true;
+                    isIs = true;
                     init_web_upload();
                     $("#zyzg").show();
                 } else {
-                    isIs=false;
+                    isIs = false;
                     $("#zyzg").hide();
                 }
             })
@@ -200,17 +243,13 @@
                 },
                 dataType: "json",
                 success: function (response) {
-                    layer.msg("不通过理由:" + response.auditReason, {
-                        offset: ['400px', '730px']
-                    });
+                    layer.msg("不通过理由:" + response.auditReason);
                 }
             });
         }
 
         function zc() {
-            layer.msg("已暂存", {
-                offset: ['300px', '750px']
-            });
+            layer.msg("已暂存");
         }
     </script>
 </head>
@@ -301,14 +340,14 @@
                             onmouseover="errorMsg('执业资格证书')"</c:if>>
                         <u:upload
                                 singleFileSize="${properties['file.picture.upload.singleFileSize']}"
-                                exts="${properties['file.picture.type']}" id="expert3"
+                                exts="${properties['file.picture.type']}" id="expert9" maxcount="1"
                                 groups="expert1,expert2,expert3,expert4,expert5,expert6,expert7,expert8"
                                 multiple="true" businessId="${sysId}" sysKey="${expertKey}"
-                                typeId="${typeMap.EXPERT_TITLE_TYPEID}" auto="true"/>
+                                typeId="9" auto="true"/>
                         <u:show showId="show3"
-                                groups="show1,show2,show3,show4,show5,show6,show7,show8"
+                                groups="show9,show2,show3,show4,show5,show6,show7,show8"
                                 businessId="${sysId}" sysKey="${expertKey}"
-                                typeId="${typeMap.EXPERT_TITLE_TYPEID}"/>
+                                typeId="9"/>
                     </div>
                 </li>
                 <li class="col-md-3 col-sm-6 col-xs-12"><span

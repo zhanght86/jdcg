@@ -111,27 +111,6 @@ public class Expert extends ExpertHistory implements Serializable {
     /**参加工作时间*/
     @DateTimeFormat(pattern="yyyy-MM")
     private Date timeToWork;
-    /**执业资格*/
-    private String professional;
-    public String getProfessional() {
-		return professional;
-	}
-
-	public void setProfessional(String professional) {
-		this.professional = professional;
-	}
-
-	public Date getTimeProfessional() {
-		return timeProfessional;
-	}
-
-	public void setTimeProfessional(Date timeProfessional) {
-		this.timeProfessional = timeProfessional;
-	}
-
-	/**执业时间*/
-    @DateTimeFormat(pattern="yyyy-MM")
-    private Date timeProfessional;
     /**从事专业起始时间*/
     @DateTimeFormat(pattern="yyyy-MM")
     private Date timeStartWork;
@@ -143,7 +122,39 @@ public class Expert extends ExpertHistory implements Serializable {
     private String postCode;
     //是否推荐信
     private int isReferenceLftter;
-    
+    /**执业资格*/
+    private String professional;
+    /**执业时间*/
+    @DateTimeFormat(pattern="yyyy-MM")
+    private Date timeProfessional;
+    /*省+地区*/
+    private String range;
+
+
+    public String getRange() {
+        return range;
+    }
+
+    public void setRange(String range) {
+        this.range = range;
+    }
+
+    public String getProfessional() {
+        return professional;
+    }
+
+    public void setProfessional(String professional) {
+        this.professional = professional;
+    }
+
+    public Date getTimeProfessional() {
+        return timeProfessional;
+    }
+
+    public void setTimeProfessional(Date timeProfessional) {
+        this.timeProfessional = timeProfessional;
+    }
+
     public int getIsReferenceLftter() {
 		return isReferenceLftter;
 	}
@@ -194,7 +205,8 @@ public class Expert extends ExpertHistory implements Serializable {
     private Date submitAt;
     
     private Date auditAt;  //审核时间
-    
+
+
     public String getStepNumber() {
         return stepNumber;
     }

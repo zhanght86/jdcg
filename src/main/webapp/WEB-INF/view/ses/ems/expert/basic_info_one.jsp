@@ -79,6 +79,19 @@
         });
 
         function submitformExpert() {
+            //父地区
+            var add = document.getElementById("addr"); //selectid
+            var addiIdex = add.selectedIndex; // 选中索引
+
+            var addValue1 = add.options[addiIdex].text;
+            //子地区
+            var add2 = document.getElementById("add"); //selectid
+
+            var addiIdex2 = add2.selectedIndex; // 选中索引
+
+            var addValue2 = add2.options[addiIdex2].text;
+
+            $("#range").val(addValue1 + "," + addValue2);
             getChildren();
             $.ajax({
                 url: "${pageContext.request.contextPath}/expert/zanCun.do",
@@ -281,6 +294,8 @@
             var addValue2 = add2.options[addiIdex2].text;
 
             $("#Taddress").text(addValue1 + "," + addValue2);
+
+
         }
 
         // 点击下一步事件 yong
@@ -314,31 +329,23 @@
             var from = "${expert.expertsFrom}";
             var relName = $("#relName").val();
             if (!relName) {
-                layer.msg("请输入姓名 !", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请输入姓名 !");
                 return false;
             }
             var gender = $("#gender").val();
             if (!gender) {
-                layer.msg("请选择性别 !", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请选择性别 !");
                 return false;
             }
 
             var politicsStatus = $("#politicsStatus").val();
             if (!politicsStatus) {
-                layer.msg("请填写政治面貌 !", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请填写政治面貌 !");
                 return false;
             }
             var birthday = $("#birthday").val();
             if (!birthday) {
-                layer.msg("请填写出生日期 !", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请填写出生日期 !");
                 return false;
             }
             var isAge = true;
@@ -351,9 +358,7 @@
                     },
                     success: function (response) {
                         if (response == "1") {
-                            layer.msg("年龄70周岁以下的才能进行注册!", {
-                                offset: ['300px', '750px']
-                            });
+                            layer.msg("年龄70周岁以下的才能进行注册!");
                             isAge = false;
                         } else {
                             isAge = true;
@@ -366,23 +371,12 @@
             }
             var nation = $("#nation").val();
             if (!nation) {
-                layer.msg("请填写民族 !", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请填写民族 !");
                 return false;
             }
-            /* 	var graduateSchool = $("#graduateSchool").val();
-             if(!graduateSchool) {
-             layer.msg("请填写毕业院校及专业 !", {
-             offset: ['300px', '750px']
-             });
-             return false;
-             } */
             var hightEducation = $("#hightEducation").val();
             if (!hightEducation) {
-                layer.msg("请选择最高学历!", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请选择最高学历!");
                 return false;
             }
             //如果是地方则为必填
@@ -390,9 +384,7 @@
 
             var jobExperiences = $("#jobExperiences").val();
             if (!jobExperiences) {
-                layer.msg("请填写主要工作经历!", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请填写主要工作经历!");
                 return false;
             }
 
@@ -400,113 +392,92 @@
             if (from == "LOCAL") {
                 var degree = $("#degree").val();
                 if (!degree) {
-                    layer.msg("请选择最高学位!", {
-                        offset: ['300px', '750px']
-                    });
+                    layer.msg("请选择最高学位!");
                     return false;
                 }
 
                 //毕业证书  学位证书
 
+                var graduateSchool = $("#graduateSchool").val();
+                if (!graduateSchool) {
+                    layer.msg("请填写毕业院校及专业 !");
+                    return false;
+                }
+
+
             }
 
             var major = $("#major").val();
             if (!major) {
-                layer.msg("请填写从事专业!", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请填写从事专业!");
                 return false;
             }
             var timeStartWork = $("#timeStartWork").val();
             if (!timeStartWork) {
-                layer.msg("请填写从事专业起始年月!", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请填写从事专业起始年月!");
                 return false;
             }
 
             var unitAddress = $("#unitAddress").val();
             if (!unitAddress) {
-                layer.msg("请填写单位地址!", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请填写单位地址!");
                 return false;
             }
             var telephone = $("#telephone").val();
             if (!telephone) {
-                layer.msg("请填写固定电话!", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请填写固定电话!");
                 return false;
             }
 
             if (telephone != "") {
                 var reg = /^(\d{3,4}-{0,1})?\d{7,8}$/
                 if (!reg.test(telephone)) {
-                    layer.msg("固定电话格式有误!", {
-                        offset: ['300px', '750px']
-                    });
+                    layer.msg("固定电话格式有误!");
                     return false;
                 }
             }
 
             var mobile = $("#mobile").val();
             if (!mobile) {
-                layer.msg("请填写手机号!", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请填写手机号!");
                 return false;
             }
 
             var healthState = $("#healthState").val();
             if (!healthState) {
-                layer.msg("请填写健康状态!", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请填写健康状态!");
                 return false;
             }
             var email = $("#email").val();
             if (!email) {
-                layer.msg("请填写个人邮箱!", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请填写个人邮箱!");
                 return false;
             }
             var emailReg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
             if (email != "" && !emailReg.test(email)) {
-                layer.msg("个人邮箱格式有误 !", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("个人邮箱格式有误 !");
                 return false;
             }
             var fax = $("#fax").val();
             var faxReg = /^(\d{3,4}-{0,1})?\d{7,8}$/
             if (fax != "" && !faxReg.test(fax)) {
-                layer.msg("传真电话格式有误 !", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("传真电话格式有误 !");
                 return false;
             }
             var postCode = $("#postCode").val();
             if (idNumber != "" && isNaN(postCode)) {
-                layer.msg("邮编格式只能输入数字 !", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("邮编格式只能输入数字 !");
                 return false;
             }
             if (from == "ARMY") {
                 var idType = $("#idType").val();
                 if (!idType) {
-                    layer.msg("请选择军队人员身份证件类型 !", {
-                        offset: ['300px', '750px']
-                    });
+                    layer.msg("请选择军队人员身份证件类型 !");
                     return false;
                 }
                 var idNumber = $("#idNumber").val();
                 if (!idNumber) {
-                    layer.msg("请填写证件号码 !", {
-                        offset: ['300px', '750px']
-                    });
+                    layer.msg("请填写证件号码 !");
                     return false;
                 }
                 // 军队人员身份证件号码唯一性验证
@@ -522,9 +493,7 @@
                         },
                         success: function (obj) {
                             if (obj == '1') {
-                                layer.msg("该证件号码已被占用!", {
-                                    offset: ['300px', '750px']
-                                });
+                                layer.msg("该证件号码已被占用!");
                                 isok = 1;
                             }
                         }
@@ -536,24 +505,18 @@
             }
             var professTechTitles = $("#professTechTitles").val();
             if (!professTechTitles) {
-                layer.msg("请填写专家技术职称!", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请填写专家技术职称!");
                 return false;
             }
             var idCardNumber = $("#idCardNumber").val();
             if (!idCardNumber) {
-                layer.msg("请填写居民身份证号码 !", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请填写居民身份证号码 !");
                 return false;
             }
             if (idCardNumber != "") {
                 var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(X|x)$)/
                 if (!reg.test(idCardNumber)) {
-                    layer.msg("居民身份证号码格式有误 !", {
-                        offset: ['300px', '750px']
-                    });
+                    layer.msg("居民身份证号码格式有误 !");
                     return false;
                 }
                 if (reg.test(idCardNumber) && idCardNumber.length == 18) {
@@ -563,26 +526,20 @@
                     var day = parseInt(idCardNumber.substring(12, 14));
                     // 月份判断
                     if (month < 1 || month > 12) {
-                        layer.msg("居民身份证号码格式有误 !", {
-                            offset: ['300px', '750px']
-                        });
+                        layer.msg("居民身份证号码格式有误 !");
                         return false;
                     }
                     // 根据大小月判断日(大月)
                     if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
                         if (day < 1 || day > 31) {
-                            layer.msg("居民身份证号码格式有误 !", {
-                                offset: ['300px', '750px']
-                            });
+                            layer.msg("居民身份证号码格式有误 !");
                             return false;
                         }
                     }
                     // 根据大小月判断日(大月)
                     if (month == 4 || month == 6 || month == 9 || month == 11) {
                         if (day < 1 || day > 30) {
-                            layer.msg("居民身份证号码格式有误 !", {
-                                offset: ['300px', '750px']
-                            });
+                            layer.msg("居民身份证号码格式有误 !");
                             return false;
                         }
                     }
@@ -591,18 +548,14 @@
                         // 闰年
                         if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
                             if (day < 1 || day > 29) {
-                                layer.msg("居民身份证号码格式有误 !", {
-                                    offset: ['300px', '750px']
-                                });
+                                layer.msg("居民身份证号码格式有误 !");
                                 return false;
                             }
                         }
                         // 平年
                         if (year % 4 != 0 || (year % 100 == 0 && year % 400 != 0)) {
                             if (day < 1 || day > 28) {
-                                layer.msg("居民身份证号码格式有误 !", {
-                                    offset: ['300px', '750px']
-                                });
+                                layer.msg("居民身份证号码格式有误 !");
                                 return false;
                             }
                         }
@@ -622,9 +575,7 @@
                     },
                     success: function (obj) {
                         if (obj == '1') {
-                            layer.msg("该身份证号已被占用!", {
-                                offset: ['300px', '750px']
-                            });
+                            layer.msg("该身份证号已被占用!");
                             isok = 1;
                         }
                     }
@@ -635,42 +586,37 @@
             }
             var workUnit = $("#workUnit").val();
             if (!workUnit) {
-                layer.msg("请填写所在单位 !", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请填写所在单位 !");
                 return false;
             }
             if (from == "LOCAL") {
                 var coverNote = $("#coverNote").val();
                 if (!coverNote) {
-                    layer.msg("请选择缴纳社会保险证明 !", {
-                        offset: ['300px', '750px']
-                    });
+                    layer.msg("请选择缴纳社会保险证明 !");
                     return false;
                 }
             }
 
             var id_areaSelect = $("#add").val();
             if (!id_areaSelect) {
-                layer.msg("请选择区域 !", {
-                    offset: ['300px', '750px']
-                });
+                layer.msg("请选择区域 !");
                 return false;
             }
             var sysId = $("#sysId").val();
-            var flag;
+            //图片上传
+            var flag = true;
             $.ajax({
                 url: "${pageContext.request.contextPath}/expert/findAttachment.do",
                 data: {
-                    "sysId": sysId
+                    "sysId": sysId,
+                    "from": from,
+                    "isReferenceLftter": $("#isReferenceLftter").val()
                 },
                 cache: false,
                 async: false,
                 success: function (data) {
-                    if (data.length < 5) {
-                        layer.msg("还有未上传!", {
-                            offset: ['300px', '750px']
-                        });
+                    if (data) {
+                        layer.msg(data);
                         flag = false;
                     } else {
                         flag = true;
@@ -678,6 +624,7 @@
                 },
                 dataType: "json"
             });
+
             return flag;
         }
 
@@ -773,17 +720,13 @@
                 },
                 dataType: "json",
                 success: function (response) {
-                    layer.msg("不通过理由:" + response.auditReason, {
-                        offset: '200px'
-                    });
+                    layer.msg("不通过理由:" + response.auditReason);
                 }
             });
         }
 
         function zc() {
-            layer.msg("已暂存", {
-                offset: ['300px', '750px']
-            });
+            layer.msg("已暂存");
         }
     </script>
 </head>
@@ -810,6 +753,7 @@
     <input type="hidden" value="${errorMap.healthState}" id="error14">
     <input type="hidden" value="${errorMap.mobile2}" id="error15">
     <input type="hidden" value="${errorMap.idNumber2}" id="error16">
+    <input type="hidden" name="range" value="${errorMap.range}" id="range"/>
     <input type="hidden" id="categoryId" name="categoryId" value=""/>
     <input type="hidden" id="expertsTypeId" name="expertsTypeId" value=""/>
     <input type="hidden" name="token2" value="<%=tokenValue%>"/>
@@ -906,27 +850,6 @@
 
                     </div>
                 </li>
-                <li class="col-md-3 col-sm-6 col-xs-12"><span class="col-md-12 col-xs-12 col-sm-12 padding-left-5"><i
-                        class="red">*</i> 省</span>
-                    <div class="select_common col-md-12 col-xs-12 col-sm-12 p0">
-                        <select id="addr" onchange="func123()"
-                                <c:if test="${fn:contains(errorField,'省')}">style="border: 1px solid #ef0000;"
-                                onmouseover="errorMsg('省')"</c:if>>
-                            <option value="">-请选择-</option>
-                        </select>
-                    </div>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12"><span class="col-md-12 col-xs-12 col-sm-12 padding-left-5"><i
-                        class="red">*</i> 市</span>
-                    <div class="select_common col-md-12 col-xs-12 col-sm-12 p0">
-                        <select name="address" id="add"
-                                <c:if test="${fn:contains(errorField,'市')}">style="border: 1px solid #ef0000;"
-                                onmouseover="errorMsg('市')"</c:if>>
-                            <option value="">-请选择-</option>
-                        </select>
-                    </div>
-                </li>
-
                 <%--如果是民--%>
                 <c:if test="${expert.expertsFrom eq 'LOCAL'}">
                     <li class="col-md-3 col-sm-6 col-xs-12">
@@ -935,11 +858,12 @@
                             <select name="coverNote" id="coverNote" style="width:100%;"
                                     <c:if test="${fn:contains(errorField,'缴纳社会保险证明')}">style="border: 1px solid #ef0000;"
                                     onmouseover="errorMsg('缴纳社会保险证明')"</c:if>>
+
                                 <option
-                                        <c:if test="${expert.coverNote eq '1'}">selected="selected"</c:if> value="1">是
+                                        <c:if test="${expert.coverNote eq '2'}">selected="selected"</c:if> value="2">否
                                 </option>
                                 <option
-                                        <c:if test="${expert.coverNote eq '0'}">selected="selected"</c:if> value="0">否
+                                        <c:if test="${expert.coverNote eq '1'}">selected="selected"</c:if> value="1">是
                                 </option>
                             </select>
                         </div>
@@ -949,15 +873,15 @@
                         <div class="input-append h30 input_group col-sm-12 col-xs-12 col-md-12 p0"
                              <c:if test="${fn:contains(errorField,'凭证上传')}">style="border: 1px solid #ef0000;"
                              onmouseover="errorMsg('凭证上传')"</c:if>>
-                            <%--图片的大小   图片的类型  --%>
+                                <%--图片的大小   图片的类型  --%>
                             <u:upload singleFileSize="${properties['file.picture.upload.singleFileSize']}"
-                                      exts="${properties['file.picture.type']}" id="expert5"
+                                      exts="${properties['file.picture.type']}" id="expert1" maxcount="1"
                                       groups="expert1,expert2,expert3,expert4,expert5,expert6,expert7,expert8"
                                       multiple="true" businessId="${sysId}" sysKey="${expertKey}"
-                                      typeId="${typeMap.EXPERT_PHOTO_TYPEID}" auto="true"/>
-                            <u:show showId="show5" groups="show1,show2,show3,show4,show5,show6,show7,show8"
+                                      typeId="1" auto="true"/>
+                            <u:show showId="show1" groups="show1,show2,show3,show4,show5,show6,show7,show8"
                                     businessId="${sysId}" sysKey="${expertKey}"
-                                    typeId="${typeMap.EXPERT_PHOTO_TYPEID}"/>
+                                    typeId="1"/>
                         </div>
                     </li>
                 </c:if>
@@ -1001,35 +925,35 @@
                              onmouseover="errorMsg('军队人员身份证件')"</c:if>>
                             <u:upload singleFileSize="${properties['file.picture.upload.singleFileSize']}"
                                       exts="${properties['file.picture.type']}"
-                                      id="expert1"
+                                      id="expert12"
                                       businessId="${sysId}"
                                       sysKey="${expertKey}"
-                                      typeId="${typeMap.EXPERT_IDNUMBER_TYPEID}"
-                                      auto="true"/>
-                            <u:show showId="show1"
-                                    businessId="${sysId}" sysKey="${expertKey}"
-                                    typeId="${typeMap.EXPERT_IDNUMBER_TYPEID}"/>
-                        </div>
-
-
-
-                        <div class="col-md-12 col-sm-12 col-xs-12 p0">
-                            <u:upload singleFileSize="${properties['file.picture.upload.singleFileSize']}"
-                                      exts="${properties['file.picture.type']}"
-                                      id="bank_up"
+                                      typeId="1"
                                       maxcount="1"
-                                      groups="taxcert_up,billcert_up,curitycert_up,bearchcert_up,business_up,bearchcert_up_up,identity_down_up,bank_up,fina_0_pro_up,fina_1_pro_up,fina_2_pro_up,fina_0_audit_up,fina_1_audit_up,fina_2_audit_up,fina_0_lia_up,fina_1_lia_up,fina_2_lia_up,fina_0_cash_up,fina_1_cash_up,fina_2_cash_up,fina_0_change_up,fina_1_change_up,fina_2_change_up"
-                                      businessId="${currSupplier.id}"
-                                      sysKey="${sysKey}"
-                                      typeId="${supplierDictionaryData.supplierBank}"
-                                      auto="true" />
-                            <u:show showId="bank_show"
-                                    groups="taxcert_show,billcert_show,curitycert_show,bearchcert_show,business_show,bearchcert_up_show,identity_down_show,bank_show,fina_0_pro,fina_1_pro,fina_2_pro,fina_0_audit,fina_1_audit,fina_2_audit,fina_0_lia,fina_1_lia,fina_2_lia,fina_0_cash,fina_1_cash,fina_2_cash,fina_0_change,fina_1_change,fina_2_change"
-                                    businessId="${currSupplier.id}"
-                                    sysKey="${sysKey}"
-                                    typeId="${supplierDictionaryData.supplierBank}" />
-                            <div class="cue"> ${err_supplierBank } </div>
+                                      auto="true"/>
+                            <u:show showId="show12"
+                                    businessId="${sysId}" sysKey="${expertKey}"
+                                    typeId="1"/>
                         </div>
+
+
+                            <%-- <div class="col-md-12 col-sm-12 col-xs-12 p0">
+                                 <u:upload singleFileSize="${properties['file.picture.upload.singleFileSize']}"
+                                           exts="${properties['file.picture.type']}"
+                                           id="bank_up"
+                                           maxcount="1"
+                                           groups="taxcert_up,billcert_up,curitycert_up,bearchcert_up,business_up,bearchcert_up_up,identity_down_up,bank_up,fina_0_pro_up,fina_1_pro_up,fina_2_pro_up,fina_0_audit_up,fina_1_audit_up,fina_2_audit_up,fina_0_lia_up,fina_1_lia_up,fina_2_lia_up,fina_0_cash_up,fina_1_cash_up,fina_2_cash_up,fina_0_change_up,fina_1_change_up,fina_2_change_up"
+                                           businessId="${currSupplier.id}"
+                                           sysKey="${sysKey}"
+                                           typeId="12"
+                                           auto="true" />
+                                 <u:show showId="bank_show"
+                                         groups="taxcert_show,billcert_show,curitycert_show,bearchcert_show,business_show,bearchcert_up_show,identity_down_show,bank_show,fina_0_pro,fina_1_pro,fina_2_pro,fina_0_audit,fina_1_audit,fina_2_audit,fina_0_lia,fina_1_lia,fina_2_lia,fina_0_cash,fina_1_cash,fina_2_cash,fina_0_change,fina_1_change,fina_2_change"
+                                         businessId="${currSupplier.id}"
+                                         sysKey="${sysKey}"
+                                         typeId="12" />
+                                 <div class="cue"> ${err_supplierBank } </div>
+                             </div>--%>
 
                     </li>
                 </c:if>
@@ -1052,13 +976,13 @@
                          <c:if test="${fn:contains(errorField,'居民身份证')}">style="border: 1px solid #ef0000;"
                          onmouseover="errorMsg('居民身份证')"</c:if>>
                         <u:upload singleFileSize="${properties['file.picture.upload.singleFileSize']}"
-                                  exts="${properties['file.picture.type']}" id="expert8"
+                                  exts="${properties['file.picture.type']}" id="expert3"
                                   groups="expert1,expert2,expert3,expert4,expert5,expert6,expert7,expert8,expert8"
-                                  multiple="true" businessId="${sysId}" sysKey="${expertKey}"
-                                  typeId="${typeMap.EXPERT_IDCARDNUMBER_TYPEID}" auto="true"/>
-                        <u:show showId="show8" groups="show1,show2,show3,show4,show5,show6,show7,show8,show8"
+                                  multiple="true" businessId="${sysId}" sysKey="${expertKey}" maxcount="1"
+                                  typeId="3" auto="true"/>
+                        <u:show showId="show3" groups="show1,show2,show3,show4,show5,show6,show7,show8,show8"
                                 businessId="${sysId}" sysKey="${expertKey}"
-                                typeId="${typeMap.EXPERT_IDCARDNUMBER_TYPEID}"/>
+                                typeId="3"/>
                     </div>
                 </li>
 
@@ -1119,6 +1043,26 @@
                                onmouseover="errorMsg('所在单位')"</c:if>/>
                         <span class="add-on">i</span>
                         <span class="input-tip">不能为空</span>
+                    </div>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12"><span class="col-md-12 col-xs-12 col-sm-12 padding-left-5"><i
+                        class="red">*</i> 省</span>
+                    <div class="select_common col-md-12 col-xs-12 col-sm-12 p0">
+                        <select id="addr" onchange="func123()"
+                                <c:if test="${fn:contains(errorField,'省')}">style="border: 1px solid #ef0000;"
+                                onmouseover="errorMsg('省')"</c:if>>
+                            <option value="">-请选择-</option>
+                        </select>
+                    </div>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12"><span class="col-md-12 col-xs-12 col-sm-12 padding-left-5"><i
+                        class="red">*</i> 市</span>
+                    <div class="select_common col-md-12 col-xs-12 col-sm-12 p0">
+                        <select name="address" id="add"
+                                <c:if test="${fn:contains(errorField,'市')}">style="border: 1px solid #ef0000;"
+                                onmouseover="errorMsg('市')"</c:if>>
+                            <option value="">-请选择-</option>
+                        </select>
                     </div>
                 </li>
                 <li class="col-md-3 col-sm-6 col-xs-12"><span class="col-md-12 col-xs-12 col-sm-12 padding-left-5"><i
@@ -1193,12 +1137,12 @@
                          <c:if test="${fn:contains(errorField,'技术职称')}">style="border: 1px solid #ef0000;"
                          onmouseover="errorMsg('技术职称')"</c:if>>
                         <u:upload singleFileSize="${properties['file.picture.upload.singleFileSize']}"
-                                  exts="${properties['file.picture.type']}" id="expert3"
+                                  exts="${properties['file.picture.type']}" id="expert4"
                                   groups="expert1,expert2,expert3,expert4,expert5,expert6,expert7,expert8"
-                                  multiple="true" businessId="${sysId}" sysKey="${expertKey}"
-                                  typeId="${typeMap.EXPERT_TITLE_TYPEID}" auto="true"/>
-                        <u:show showId="show3" groups="show1,show2,show3,show4,show5,show6,show7,show8"
-                                businessId="${sysId}" sysKey="${expertKey}" typeId="${typeMap.EXPERT_TITLE_TYPEID}"/>
+                                  multiple="true" businessId="${sysId}" sysKey="${expertKey}" maxcount="1"
+                                  typeId="4" auto="true"/>
+                        <u:show showId="show4" groups="show1,show2,show3,show4,show5,show6,show7,show8"
+                                businessId="${sysId}" sysKey="${expertKey}" typeId="4"/>
                     </div>
                 </li>
                 <li class="col-md-3 col-sm-6 col-xs-12"><span class="col-md-12 col-xs-12 col-sm-12 padding-left-5"> 取得技术职称时间</span>
@@ -1258,12 +1202,12 @@
                          <c:if test="${fn:contains(errorField,'毕业证书')}">style="border: 1px solid #ef0000;"
                          onmouseover="errorMsg('毕业证书')"</c:if>>
                         <u:upload singleFileSize="${properties['file.picture.upload.singleFileSize']}"
-                                  exts="${properties['file.picture.type']}" id="expert2"
+                                  exts="${properties['file.picture.type']}" id="expert5"
                                   groups="expert1,expert2,expert3,expert4,expert5,expert6,expert7,expert8"
-                                  multiple="true" businessId="${sysId}" sysKey="${expertKey}"
-                                  typeId="${typeMap.EXPERT_ACADEMIC_TYPEID}" auto="true"/>
-                        <u:show showId="show2" groups="show1,show2,show3,show4,show5,show6,show7,show8"
-                                businessId="${sysId}" sysKey="${expertKey}" typeId="${typeMap.EXPERT_ACADEMIC_TYPEID}"/>
+                                  multiple="true" businessId="${sysId}" sysKey="${expertKey}" maxcount="1"
+                                  typeId="5" auto="true"/>
+                        <u:show showId="show5" groups="show1,show2,show3,show4,show5,show6,show7,show8"
+                                businessId="${sysId}" sysKey="${expertKey}" typeId="5"/>
                     </div>
                 </li>
                 <c:if test="${expert.expertsFrom eq 'ARMY'}">
@@ -1299,12 +1243,12 @@
                          <c:if test="${fn:contains(errorField,'学位证书')}">style="border: 1px solid #ef0000;"
                          onmouseover="errorMsg('学位证书')"</c:if>>
                         <u:upload singleFileSize="${properties['file.picture.upload.singleFileSize']}"
-                                  exts="${properties['file.picture.type']}" id="expert4"
+                                  exts="${properties['file.picture.type']}" id="expert6"
                                   groups="expert1,expert2,expert3,expert4,expert5,expert6,expert7,expert8"
-                                  multiple="true" businessId="${sysId}" sysKey="${expertKey}"
-                                  typeId="${typeMap.EXPERT_DEGREE_TYPEID}" auto="true"/>
-                        <u:show showId="show4" groups="show1,show2,show3,show4,show5,show6,show7,show8"
-                                businessId="${sysId}" sysKey="${expertKey}" typeId="${typeMap.EXPERT_DEGREE_TYPEID}"/>
+                                  multiple="true" businessId="${sysId}" sysKey="${expertKey}" maxcount="1"
+                                  typeId="6" auto="true"/>
+                        <u:show showId="show6" groups="show1,show2,show3,show4,show5,show6,show7,show8"
+                                businessId="${sysId}" sysKey="${expertKey}" typeId="6"/>
                     </div>
                 </li>
                 <%-- <li class="col-md-3 col-sm-6 col-xs-12">
@@ -1330,17 +1274,20 @@
                 <li class="col-md-3 col-sm-6 col-xs-12"><span class="col-md-12 col-xs-12 col-sm-12 padding-left-5"><i
                         class="red"></i>相关机关事业部门推荐信</span>
                     <div class="input-append input_group col-sm-12 col-xs-12 col-md-12 p0">
-                        <span class="input-tip">相关机关事业部门推荐信</span> <select
-                            style="width:100%" name="isReferenceLftter" id="isReferenceLftter"
-                            <c:if test="${fn:contains(errorField,'相关机关事业部门推荐信')}">style="border: 1px solid #ef0000;"
-                            onmouseover="errorMsg('相关机关事业部门推荐信')"</c:if>>
-                        <option
-                                <c:if test="${expert.isReferenceLftter eq '1'}">selected="selected"</c:if> value="1">是
-                        </option>
-                        <option
-                                <c:if test="${expert.isReferenceLftter eq '0'}">selected="selected"</c:if> value="0">否
-                        </option>
-                    </select>
+                        <span class="input-tip">相关机关事业部门推荐信</span>
+                        <select
+                                style="width:100%" name="isReferenceLftter" id="isReferenceLftter"
+                                <c:if test="${fn:contains(errorField,'相关机关事业部门推荐信')}">style="border: 1px solid #ef0000;"
+                                onmouseover="errorMsg('相关机关事业部门推荐信')"</c:if>>
+                            <option
+                                    <c:if test="${expert.isReferenceLftter eq '1'}">selected="selected"</c:if>
+                                    value="1">是
+                            </option>
+                            <option
+                                    <c:if test="${expert.isReferenceLftter eq '2'}">selected="selected"</c:if>
+                                    value="2">否
+                            </option>
+                        </select>
                     </div>
                 </li>
 
@@ -1354,14 +1301,14 @@
                             onmouseover="errorMsg('推荐信')"</c:if>>
                         <u:upload
                                 singleFileSize="${properties['file.picture.upload.singleFileSize']}"
-                                exts="${properties['file.picture.type']}" id="expert37"
+                                exts="${properties['file.picture.type']}" id="expert8"
                                 groups="expert1,expert2,expert3,expert4,expert5,expert6,expert7,expert8"
-                                multiple="true" businessId="${sysId}" sysKey="${expertKey}"
-                                typeId="${typeMap.EXPERT_TITLE_TYPEID}" auto="true"/>
-                        <u:show showId="show37"
+                                multiple="true" businessId="${sysId}" sysKey="${expertKey}" maxcount="1"
+                                typeId="8" auto="true"/>
+                        <u:show showId="show8"
                                 groups="show1,show2,show3,show4,show5,show6,show7,show8"
                                 businessId="${sysId}" sysKey="${expertKey}"
-                                typeId="${typeMap.EXPERT_TITLE_TYPEID}"/>
+                                typeId="8"/>
                     </div>
                 </li>
             </ul>
@@ -1390,15 +1337,15 @@
                     <%-- <h2 class="count_flow"><i>3</i><font color=red></font>获奖证书(限国家科技进步三等或军队科技进步二等以上奖项)</h2>--%>
 
                     <div class="input-append h30 input_group col-sm-12 col-xs-12 col-md-12 p0"
-                         <c:if test="${fn:contains(errorField,'学位证书')}">style="border: 1px solid #ef0000;"
-                         onmouseover="errorMsg('学位证书')"</c:if>>
+                         <c:if test="${fn:contains(errorField,'获奖证书')}">style="border: 1px solid #ef0000;"
+                         onmouseover="errorMsg('获奖证书')"</c:if>>
                         <u:upload singleFileSize="${properties['file.picture.upload.singleFileSize']}"
-                                  exts="${properties['file.picture.type']}" id="expert18"
+                                  exts="${properties['file.picture.type']}" id="expert7"
                                   groups="expert1,expert2,expert3,expert4,expert5,expert6,expert7,expert8"
-                                  multiple="true" businessId="${sysId}" sysKey="${expertKey}"
-                                  typeId="${typeMap.EXPERT_DEGREE_TYPEID}" auto="true"/>
-                        <u:show showId="show18" groups="show1,show2,show3,show4,show5,show6,show7,show8"
-                                businessId="${sysId}" sysKey="${expertKey}" typeId="${typeMap.EXPERT_DEGREE_TYPEID}"/>
+                                  multiple="true" businessId="${sysId}" sysKey="${expertKey}" maxcount="1"
+                                  typeId="7" auto="true"/>
+                        <u:show showId="show7" groups="show1,show2,show3,show4,show5,show6,show7,show8"
+                                businessId="${sysId}" sysKey="${expertKey}" typeId="7"/>
                     </div>
                 </div>
             </ul>
@@ -1483,6 +1430,11 @@
             }
         });
 
+        if ($("#isReferenceLftter").val() == "1") {
+            $("#tjx").show();
+            init_web_upload();
+        }
+
         $("#isReferenceLftter").change(function () {
             if ($(this).val() == "1") {
                 $("#tjx").show();
@@ -1490,11 +1442,9 @@
                 wtj = 5;
             } else {
                 $("#tjx").hide();
-
                 wtj = 4;
             }
         });
-
     })();
 </script>
 </html>

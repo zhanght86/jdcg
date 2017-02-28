@@ -189,7 +189,7 @@ public class PurchaseRequiredController extends BaseController{
 		String typeId = DictionaryDataUtil.getId("PURCHASE_FILE");
 		model.addAttribute("typeId", typeId);
 		model.addAttribute("fileId", fileId);
-		
+        model.addAttribute("argument", planNo);
 		model.addAttribute("org_advice", type);
 		if(type.equals("1")){
 			return "bss/pms/purchaserequird/view";
@@ -198,7 +198,29 @@ public class PurchaseRequiredController extends BaseController{
 		}
 		
 	}
-	
+
+    @RequestMapping(value="/getInfoByNo",produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String getInfoByNo(String planNo,Model model,String type){
+        PurchaseRequired p=new PurchaseRequired();
+        p.setUniqueId(planNo.trim());
+        List<PurchaseRequired> list = purchaseRequiredService.queryUnique(p);
+        model.addAttribute("kind", DictionaryDataUtil.find(5));//获取数据字典数据
+        model.addAttribute("list", list);
+        HashMap<String,Object> map=new HashMap<String,Object>();
+        map.put("typeName", "1");
+        List<PurchaseDep> list2 = purchserOrgnaztionService.findPurchaseDepList(map);
+        model.addAttribute("requires", list2);
+        model.addAttribute("types", DictionaryDataUtil.find(6));
+        String fileId = list.get(0).getFileId();
+        String typeId = DictionaryDataUtil.getId("PURCHASE_FILE");
+        model.addAttribute("typeId", typeId);
+        model.addAttribute("fileId", fileId);
+        model.addAttribute("org_advice", type);
+        String str=  JSON.toJSONString(model);
+        return str;
+    }
+
 	/**
 	 * 
 	* @Title: updateById
