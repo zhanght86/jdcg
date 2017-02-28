@@ -245,13 +245,13 @@
     <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script> -->
     <%-- <script src="${pageContext.request.contextPath}/public/backend/js/lock_table_head.js" ></script>
      --%>
-    <link rel="stylesheet" media="screen" href="${pageContext.request.contextPath}/test/handsontable.min.css">
-    <link rel="stylesheet" media="screen" href="${pageContext.request.contextPath}/test/pikaday.css">
-    <script src="${pageContext.request.contextPath}/test/pikaday.js"></script>
-    <script src="${pageContext.request.contextPath}/test/moment.js"></script>
-    <script src="${pageContext.request.contextPath}/test/ZeroClipboard.js"></script>
-    <script src="${pageContext.request.contextPath}/test/numbro.js"></script>
-    <script src="${pageContext.request.contextPath}/test/handsontable.min.js"></script>
+    <link rel="stylesheet" media="screen" href="${pageContext.request.contextPath}/js/handsontable/handsontable.min.css">
+    <link rel="stylesheet" media="screen" href="${pageContext.request.contextPath}/js/handsontable/pikaday.css">
+    <script src="${pageContext.request.contextPath}/js/handsontable/pikaday.js"></script>
+    <script src="${pageContext.request.contextPath}/js/handsontable/moment.js"></script>
+    <script src="${pageContext.request.contextPath}/js/handsontable/ZeroClipboard.js"></script>
+    <script src="${pageContext.request.contextPath}/js/handsontable/numbro.js"></script>
+    <script src="${pageContext.request.contextPath}/js/handsontable/handsontable.min.js"></script>
 </head>
 
 <body>
@@ -493,7 +493,6 @@
             },
             dataType: "json",
             success: function (data) {
-                console.info(JSON.stringify(data))
                 var kind = [], sources = [], kinds = data.kind;
                 kinds.forEach(function (item) {
                     kind.push(item.name);
