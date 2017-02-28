@@ -90,6 +90,20 @@ public  enum ExpertPictureType {
         public Integer getSign() {
             return 12;
         }
+    },
+    //专家申请表
+    APPLICATION_PROOF {
+        @Override
+        public Integer getSign() {
+            return 13;
+        }
+    },
+    //专家承诺书
+    COMMITMENT_PROOF {
+        @Override
+        public Integer getSign() {
+            return 14;
+        }
     };
 
 
